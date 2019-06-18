@@ -1,0 +1,106 @@
+<app-header></app-header>
+<div class="container" style="margin-top: 70px;">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a
+        class="nav-link active"
+        id="people-tab"
+        data-toggle="tab"
+        href="#people"
+        role="tab"
+        aria-controls="home"
+        aria-selected="true"
+        >People</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link "
+        id="starships-tab"
+        data-toggle="tab"
+        href="#starships"
+        role="tab"
+        aria-controls="profile"
+        aria-selected="false"
+        [ngClass]="isLoading ? 'disabled' : ''"
+        >Starships</a
+      >
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent" *ngIf="!isLoading">
+    <div
+      class="tab-pane fade show active"
+      id="people"
+      role="tabpanel"
+      aria-labelledby="people-tab"
+    >
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let person of people">
+            <td>{{ person.name }}</td>
+            <td>
+              <button
+                class="btn btn-primary"
+                (click)="selectItem(person, 'person')"
+              >
+                Show details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="starships"
+      role="tabpanel"
+      aria-labelledby="starships-tab"
+    >
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let starship of starships">
+            <td>{{ starship.name }}</td>
+            <td>
+              <button
+                class="btn btn-primary"
+                (click)="selectItem(starship, 'starship')"
+              >
+                Show details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="loading" *ngIf="isLoading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div class="card text-center" *ngIf="selectedItem">
+    <div class="card-header"># {{ selectedItem.name }}</div>
+
+    <div class="card-block" *ngIf="type === 'person'">
+      <h4 class="card-title">Specie: {{ species.name }}</h4>
+      <p class="card-text">Designation: {{ species.designation }}</p>
+      <p class="card-text">Classification: {{ species.classification }}</p>
+    </div>
+
+    <div class="card-block" *ngIf="type === 'starship'">
+      <h4 class="card-title">Pilot: {{ pilots && pilots.name || 'No Pilots' }}</h4>
+    </div>
+  </div>
+</div>
