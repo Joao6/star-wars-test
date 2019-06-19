@@ -25,6 +25,10 @@ DB_PASSWORD=
 DB_DATABASE=starwars
 ```
 
+## Generate APP_KEY and save it inside the .env file
+
+Just run `adonis key:generate`
+
 ### Migrations
 
 Run the following command to run startup migrations.
